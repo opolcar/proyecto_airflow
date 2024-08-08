@@ -18,8 +18,8 @@ dag_args = {
 
 
 dag = DAG(
-    "test1",
-    description="Mi primer DAG",
+    "DAG Tutorial",
+    description="DAG Tutorial",
     default_args=dag_args,
     schedule=timedelta(days=1),
     start_date=datetime(2021, 1, 1),

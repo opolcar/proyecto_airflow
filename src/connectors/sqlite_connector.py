@@ -3,13 +3,7 @@ import pandas as pd
 
 class mysql_connector():
     def __init__(self, database_name:str):
-        self.database_name=database_name
-        self.conn = pymysql.connect(
-            host='localhost',
-            user='root',
-            password='admin',
-            database=database_name
-        )
+        conexion = sqlite3.connect("tienda_online.db")
 
     # def close(self):
     #     self.conn.close()

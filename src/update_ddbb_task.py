@@ -1,5 +1,10 @@
-from src.connectors import sqlite_connector
 
-class update_ddbb():
-    def __init__(self) -> None:
-        self.conn=sqlite_connector()
+from src.connectors.sqlite_connector import sqlite_connector
+
+def update_ddbb_execute():
+    conn=sqlite_connector("tienda_online.db")
+    print(1)
+
+if __name__ == "__main__":
+    update_ddbb_execute()
+    

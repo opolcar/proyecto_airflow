@@ -3,9 +3,8 @@ from datetime import datetime, timedelta
 
 from airflow import DAG
 from airflow.exceptions import AirflowFailException
-from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-
+from src.update_ddbb_task import update_ddbb_execute
 
 dag_args = {
     "depends_on_past": False,
@@ -29,13 +28,10 @@ dag = DAG(
 )
 
 
-def update_ddbb_task(**kwargs):
-    print('yo me cago en el puto airflow')
-
 
 tarea1 = PythonOperator(
     task_id='update_ddbb_task',
-    python_callable=update_ddbb_task,
+    python_callable=update_ddbb_execute,
     dag=dag
 )
 

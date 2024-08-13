@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.exceptions import AirflowFailException
 from airflow.operators.python import PythonOperator
-from src.update_ddbb_task import update_ddbb_execute
+from src.update_ddbb_task import execute
 
 dag_args = {
     "depends_on_past": False,
@@ -28,10 +28,10 @@ dag = DAG(
 )
 
 
-
 tarea1 = PythonOperator(
     task_id='update_ddbb_task',
-    python_callable=update_ddbb_execute,
+    python_callable=execute,
+    op_kwargs={'database_name': 'proyecto_airflow/tienda_online.db'},
     dag=dag
 )
 

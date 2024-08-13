@@ -3,18 +3,18 @@ import pandas as pd
 
 class sqlite_connector():
     def __init__(self, database_name:str):
-        conexion = sqlite3.connect(database_name)
+        self.conexion = sqlite3.connect(database_name)
 
-    # def close(self):
-    #     self.conn.close()
+    def close(self):
+        self.conexion.close()
 
-    # def execute_query(self,query:str):
-    #     cursor = self.conn.cursor()
-    #     cursor.execute(query)
-    #     self.conn.commit()
+    def execute_query(self,query:str):
+        cursor = self.conexion.cursor()
+        cursor.execute(query)
+        self.conexion.commit()
 
     def get_df (self, query:str) -> pd.DataFrame:
-        df=pd.read_sql(query,self.conn)
+        df=pd.read_sql(query,self.conexion)
         return df
     
     # def change_table(self, old_table:str, new_table:str):

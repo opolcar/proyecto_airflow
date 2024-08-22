@@ -1,9 +1,8 @@
 from datetime import datetime, timedelta
 from airflow import DAG
+from airflow.exceptions import AirflowFailException
 from airflow.operators.python import PythonOperator
-
-def saludar():
-    print("Holaaa Airflow")
+from src.consultar_euromillones_task import  saludar, extraer_numeros_premiados
     
 default_args={
     "owner":"airflow",
@@ -15,10 +14,10 @@ default_args={
 }
 
 dag = DAG(
-    "saludar",
-    description="Un DAG simple para imprimir saludo",
+    "saludar_y_consultar_euromillones",
+    description="Un DAG simple para imprimir saludo y consultar euromillones",
     default_args=default_args,
-    schedule_interval=timedelta(days=1),
+    schedule_interval="0 1 * * *", 
     catchup=False,
 )
 
@@ -27,4 +26,12 @@ saludo_task = PythonOperator(
     python_callable=saludar,
     dag=dag,
 )
-saludo_task
+
+consultar_euromillones_task=PythonOperator(
+    task_id="consultar_numeros_premiados",
+    python_callable=extraer_numeros_premiados,
+    dag=dag,
+)
+
+
+saludo_task >> consultar_euromillones_task

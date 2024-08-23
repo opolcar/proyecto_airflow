@@ -20,8 +20,8 @@ dag = DAG(
     "Update_BBDD",
     description="Dag de actualización de base de datos",
     default_args=dag_args,
-    schedule=timedelta(days=1),
-    start_date=datetime(2021, 1, 1),
+    schedule_interval="0 1 * * 3,6",
+    start_date=datetime(2024, 8, 20),
     catchup=False,
     tags=["ETL"],
     params={"param1": "param1"}

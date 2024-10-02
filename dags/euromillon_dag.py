@@ -17,7 +17,7 @@ dag = DAG(
     "saludar_y_consultar_euromillones",
     description="Un DAG simple para imprimir saludo y consultar euromillones",
     default_args=default_args,
-    schedule_interval="0 1 * * *", 
+    schedule="0 1 * * *", 
     catchup=False,
 )
 
